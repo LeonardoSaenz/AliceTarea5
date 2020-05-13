@@ -1,0 +1,8 @@
+{
+  "name": "Alice",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}

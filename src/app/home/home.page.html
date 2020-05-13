@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title class="ion-text-center">
+      <ion-text color="success">ϟ Konoha Editor ϟ</ion-text>
+    </ion-title>
+    <ion-buttons slot="end" *ngIf="image">
+      <ion-button (click)="saveImage()"><ion-text color="success">Guardar</ion-text></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content color="dark">
+  <ion-button expand="full" (click)="selectImage()" color="success"><ion-text color="dark"><ion-icon name="camera"></ion-icon> Tomar Foto <ion-icon name="camera"></ion-icon></ion-text></ion-button>
+    <div style="margin-top: 15px;">
+    <web-photo-filter 
+    [class.no-original]="selectedFilter != '' " 
+    [class.only-original]="selectedFilter == '' "
+    [src]="image" 
+    keep="true" 
+    [filter]="selectedFilter" 
+    (filterLoad)="imageLoaded($event)">
+    </web-photo-filter>
+  </div>
+  
+ 
+  <ion-slides [options]="slideOpts" *ngIf="image">
+ 
+    <ion-slide *ngFor="let opts of filterOptions; let i = index;" tappable (click)="filter(i)">
+        <div >
+        <web-photo-filter
+          [class.no-original]="i > 0" 
+          [src]="image" 
+          keep="true" 
+          [filter]="opts.value">
+        </web-photo-filter>
+      </div>
+      <ion-text [class.selected]="i == selectedIndex">{{ opts.name }}</ion-text>
+    </ion-slide>
+  </ion-slides>
+ 
+</ion-content>
